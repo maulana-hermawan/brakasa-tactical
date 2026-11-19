@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--BRAKASA_HEAD_META-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('brakasa-theme');
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+          var savedLang = localStorage.getItem('brakasa-lang');
+          if (savedLang === 'id' || savedLang === 'en') {
+            document.documentElement.setAttribute('lang', savedLang);
+          }
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--BRAKASA_LCP_PRELOAD_SHELL--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

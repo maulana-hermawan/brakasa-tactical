@@ -1,0 +1,401 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+  }
+
+  #root {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  img,
+  video,
+  svg {
+    max-width: 100%;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+  }
+
+  a[href],
+  button:not(:disabled),
+  summary,
+  select:not(:disabled),
+  label[for],
+  label:has(> input[type="checkbox"]:not(:disabled), > input[type="radio"]:not(:disabled)),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="link"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  [role="switch"],
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled),
+  input[type="file"]:not(:disabled),
+  input[type="submit"]:not(:disabled),
+  input[type="button"]:not(:disabled),
+  input[type="reset"]:not(:disabled),
+  input[type="range"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.52;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  input[type="password"],
+  input[type="date"],
+  textarea {
+    cursor: text;
+    scroll-margin-block: 96px;
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  main:focus {
+    outline: none;
+  }
+}
+
+/* Skip to content accessibility link */
+.skip-link {
+  position: fixed;
+  top: -64px;
+  left: 8px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  background-color: var(--accent-primary);
+  color: var(--accent-foreground);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: var(--radius-control);
+  transition: top var(--dur-snap) var(--ease-mechanical);
+}
+
+.skip-link:focus-visible {
+  top: 8px;
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+/* 3-State Responsive Container */
+.container-brakasa {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 640px) {
+  .container-brakasa {
+    padding-inline: 24px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .container-brakasa {
+    padding-inline: 32px;
+  }
+}
+
+/* Typography & Telemetry Helpers */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans-body {
+  font-family: var(--font-sans);
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mechanical Plate Accents */
+.chamfer-plate {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    0 100%
+  );
+}
+
+.corner-bracket-box {
+  position: relative;
+}
+
+.corner-bracket-box::before,
+.corner-bracket-box::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+}
+
+.corner-bracket-box::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1.5px solid var(--border-strong);
+  border-left: 1.5px solid var(--border-strong);
+}
+
+.corner-bracket-box::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 1.5px solid var(--border-strong);
+  border-bottom: 1.5px solid var(--border-strong);
+}
+
+/* Mechanical Buttons (44px min tap target, 4px control radius) */
+.btn-brakasa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-control);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    background-color var(--dur-snap) var(--ease-mechanical),
+    border-color var(--dur-snap) var(--ease-mechanical),
+    color var(--dur-snap) var(--ease-mechanical),
+    transform var(--dur-snap) var(--ease-mechanical);
+}
+
+.btn-brakasa:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--accent-foreground);
+  border-color: var(--accent-primary);
+}
+
+.btn-primary:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--bg-elevated);
+  border-color: var(--text-primary);
+}
+
+.btn-olive {
+  background-color: var(--brand-olive);
+  color: #FAF8F4;
+  border-color: var(--brand-olive);
+}
+
+.btn-olive:hover:not(:disabled):not([aria-disabled="true"]) {
+  filter: brightness(1.08);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-subtle);
+}
+
+.btn-ghost:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+/* Tactile Form Inputs */
+.input-brakasa {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-control);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  transition: border-color var(--dur-snap) var(--ease-mechanical);
+}
+
+.input-brakasa::placeholder {
+  color: var(--text-muted);
+}
+
+.input-brakasa:hover:not(:disabled) {
+  border-color: var(--text-secondary);
+}
+
+.input-brakasa[aria-invalid="true"] {
+  border-color: var(--status-danger);
+}
+
+/* Full-Screen Hero Container (Locked Dark Surfaces Across Themes) */
+.hero-armory {
+  position: relative;
+  width: 100%;
+  background-color: #0F1110;
+  color: var(--hero-text-primary);
+  overflow: hidden;
+  border-bottom: 1px solid #2E3430;
+}
+
+.hero-armory-scrim {
+  background: var(--hero-scrim-mobile);
+}
+
+@media (min-width: 640px) {
+  .hero-armory-scrim {
+    background: var(--hero-scrim);
+  }
+}
+
+/* Sticky Navbar Surfaces (1 functional glass surface per viewport) */
+.navbar-glass {
+  background-color: var(--glass-surface);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.navbar-hero-overlay {
+  background-color: rgba(15, 17, 16, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom-color: rgba(240, 239, 234, 0.14);
+}
+
+/* Screen Reader Only */
+.sr-only-brakasa {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Loading Bar Pulse (Deterministic, mechanical) */
+@keyframes brakasa-loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+.brakasa-loading-indicator {
+  animation: brakasa-loading-bar 1.2s var(--ease-mechanical) infinite;
+}
+
+/* Reduced Motion Compliance (R-39) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .btn-brakasa:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* Print Invoice Cleanup */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body,
+  html {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}
